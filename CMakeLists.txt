@@ -1,16 +1,16 @@
 cmake_minimum_required(VERSION 2.8)
 
 if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
-  if(DEFINED ENV{VITASDK})
-    set(CMAKE_TOOLCHAIN_FILE "$ENV{VITASDK}/share/vita.toolchain.cmake" CACHE PATH "toolchain file")
+  if(DEFINED ENV{DOLCESDK})
+    set(CMAKE_TOOLCHAIN_FILE "$ENV{DOLCESDK}/share/dolce.toolchain.cmake" CACHE PATH "toolchain file")
   else()
-    message(FATAL_ERROR "Please define VITASDK to point to your SDK path!")
+    message(FATAL_ERROR "Please define DOLCESDK to point to your SDK path!")
   endif()
 endif()
 
 set(SHORT_NAME vitagiftest)
 project(${SHORT_NAME})
-include("${VITASDK}/share/vita.cmake" REQUIRED)
+include("${DOLCESDK}/share/dolce.cmake" REQUIRED)
 
 set(VITA_APP_NAME "Vita Gif Test")
 set(VITA_TITLEID  "GIFTEST01")
@@ -38,6 +38,10 @@ add_executable(${SHORT_NAME}
 target_link_libraries(${SHORT_NAME}
   vita2d
   SceDisplay_stub
+  SceGxmInternalForVsh_stub
+  SceSharedFb_stub
+  SceAppMgrUser_stub
+  SceDisplayUser_stub
   SceGxm_stub
   ScePgf_stub
   ScePvf_stub
@@ -50,7 +54,7 @@ target_link_libraries(${SHORT_NAME}
   z
   m
   c
-  debugnet
+#  debugnet
   SceCtrl_stub
   SceSysmodule_stub
   SceNet_stub
@@ -64,10 +68,11 @@ target_link_libraries(${SHORT_NAME}
   
 )
 
-vita_create_self(${SHORT_NAME}.self ${SHORT_NAME})
-vita_create_vpk(${SHORT_NAME}.vpk ${VITA_TITLEID} ${SHORT_NAME}.self
+dolce_create_self(${SHORT_NAME}.self ${SHORT_NAME})
+dolce_create_vpk(${SHORT_NAME}.vpk ${VITA_TITLEID} ${SHORT_NAME}.self
   VERSION ${VITA_VERSION}
   NAME ${VITA_APP_NAME}
   
+  FILE ${CMAKE_SOURCE_DIR}/assets/walter_dog.gif assets/walter_dog.gif
   
 )

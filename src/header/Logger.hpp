@@ -10,7 +10,9 @@
 #define port_server 18194
 
 
-#if USE_DEBUG_SCREEN_PRINTF == 1
+#if	USE_DEBUG_SCREEN_PRINTF == 0
+
+#elif USE_DEBUG_SCREEN_PRINTF == 1
 	#include "debugScreen.h"
 #else
 	#include <debugnet.h>

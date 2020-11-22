@@ -5,12 +5,19 @@
 
 
 void Logger::End(){
+#if	USE_DEBUG_SCREEN_PRINTF == 0
+
+#elif USE_DEBUG_SCREEN_PRINTF == 1
 	
+#else
 	debugNetFinish();
+#endif
 }
 
 void Logger::Setup(){
-#if USE_DEBUG_SCREEN_PRINTF == 1
+#if	USE_DEBUG_SCREEN_PRINTF == 0
+
+#elif USE_DEBUG_SCREEN_PRINTF == 1
 	psvDebugScreenInit();
 	psvDebugScreenSetFgColor(COLOR_WHITE);
 	psvDebugScreenSetBgColor(COLOR_BLACK);
@@ -24,7 +31,9 @@ void Logger::Setup(){
 
 void Logger::Info(const std::string & logmsg)
 {
-#if USE_DEBUG_SCREEN_PRINTF == 1
+#if	USE_DEBUG_SCREEN_PRINTF == 0
+
+#elif USE_DEBUG_SCREEN_PRINTF == 1
 	psvDebugScreenSetFgColor(COLOR_WHITE);
     psvDebugScreenPrintf(logmsg.c_str());
 	psvDebugScreenSetFgColor(COLOR_WHITE);
@@ -35,7 +44,9 @@ void Logger::Info(const std::string & logmsg)
 }
 void Logger::InfoDelay(const std::string & logmsg)
 {
-#if USE_DEBUG_SCREEN_PRINTF == 1
+#if	USE_DEBUG_SCREEN_PRINTF == 0
+
+#elif USE_DEBUG_SCREEN_PRINTF == 1
 	psvDebugScreenSetFgColor(COLOR_WHITE);
     psvDebugScreenPrintf(logmsg.c_str());
 	psvDebugScreenSetFgColor(COLOR_WHITE);
@@ -48,7 +59,9 @@ void Logger::InfoDelay(const std::string & logmsg)
 
 void Logger::Warning(const std::string & logmsg)
 {
-#if USE_DEBUG_SCREEN_PRINTF == 1
+#if	USE_DEBUG_SCREEN_PRINTF == 0
+
+#elif USE_DEBUG_SCREEN_PRINTF == 1
 	psvDebugScreenSetFgColor(COLOR_YELLOW);
     psvDebugScreenPrintf(logmsg.c_str());
 	psvDebugScreenSetFgColor(COLOR_WHITE);
@@ -60,7 +73,9 @@ void Logger::Warning(const std::string & logmsg)
 
 void Logger::Error(const std::string & logmsg)
 {
-#if USE_DEBUG_SCREEN_PRINTF == 1
+#if	USE_DEBUG_SCREEN_PRINTF == 0
+
+#elif USE_DEBUG_SCREEN_PRINTF == 1
 	psvDebugScreenSetFgColor(COLOR_RED);
     psvDebugScreenPrintf(logmsg.c_str());
 	psvDebugScreenSetFgColor(COLOR_WHITE);
@@ -80,7 +95,9 @@ void Logger::ClearScreen(){
 
 
 void Logger::PrintDis(int which){
-#if USE_DEBUG_SCREEN_PRINTF == 1
+#if	USE_DEBUG_SCREEN_PRINTF == 0
+
+#elif USE_DEBUG_SCREEN_PRINTF == 1
 	if(which == 1){
 		printdis();
 	}else if(which == 2){
